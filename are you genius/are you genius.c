@@ -5,7 +5,7 @@
 int main()
 {
 	int iq;
-	while (~scanf("%d", &iq)){
+	while (~scanf("%d", &iq)) {
 		if (iq >= 140) {
 			printf("genius");
 		}
