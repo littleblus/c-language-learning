@@ -59,15 +59,19 @@
 
 
 //打印1000-2000中的闰年
-//int main()
-//{
-//	for (int n = 1000; n <= 2000; n++) {
-//		if (n % 4 == 0) {
-//			printf("%d\n", n);
-//		}
-//	}
-//	return 0;
-//}
+int main()
+{
+	for (int n = 1000; n <= 2000; n++) {
+		if (n % 4 == 0 && !(n % 100 == 0)) {
+			printf("%d\n", n);
+		}
+		else {
+			if (n % 400 == 0)
+				printf("%d\n", n);
+		}
+	}
+	return 0;
+}
 
 
 //给定两个数，求出这两个数的最大公约数
@@ -100,22 +104,22 @@
 
 
 //打印100-200的素数
-int main()
-{
-	int p = 0;//判断变量
-	for (int n = 100; n <= 200; n++) {
-		for (int a = 2; a < n; a++) {
-			p = 0;
-			//如果整除成功，则n不是素数
-			if (n % a == 0) {
-				p = 1;
-				break;
-			}
-			else
-				continue;
-		}
-		if (p == 0)
-			printf("%d\n", n);
-	}
-	return 0;
-}
+//int main()
+//{
+//	int p = 0;//判断变量
+//	for (int n = 100; n <= 200; n++) {
+//		for (int a = 2; a < n; a++) {
+//			p = 0;
+//			//如果整除成功，则n不是素数
+//			if (n % a == 0) {
+//				p = 1;
+//				break;
+//			}
+//			else
+//				continue;
+//		}
+//		if (p == 0)
+//			printf("%d\n", n);
+//	}
+//	return 0;
+//}
