@@ -31,7 +31,7 @@ void print(char arr[ROW][LINE], int row, int line)
 		printf("\n");
 		if (i < row - 1) {
 			for (int j = 0; j < line; j++) {
-				printf("---", arr[i][j]);
+				printf("---");
 				if (j < line - 1)
 					printf("|");
 			}
@@ -110,7 +110,7 @@ char is_win(char arr[ROW][LINE], int row, int line)
 		}
 	}
 	//ÅÐ¶Ï¶Ô½ÇÏß
-	for (int i = 0, j = 0; i < row - 1, j < line - 1; i++, j++) {
+	for (int i = 0, j = 0; i < row - 1 && j < line - 1; i++, j++) {
 		if (arr[i][j] == arr[i + 1][j + 1] && arr[i][j] != ' ') {
 			if (i == row - 2)
 				return arr[i][j];
@@ -118,7 +118,7 @@ char is_win(char arr[ROW][LINE], int row, int line)
 		}
 		break;
 	}
-	for (int i = row-1, j = 0; i >=0, j < line - 1; i--, j++) {
+	for (int i = row-1, j = 0; i >= 0 && j < line - 1; i--, j++) {
 		if (arr[i][j] == arr[i - 1][j + 1] && arr[i][j] != ' ') {
 			if (j == line - 2)
 				return arr[i][j];
