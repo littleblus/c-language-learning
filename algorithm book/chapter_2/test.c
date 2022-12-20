@@ -119,7 +119,37 @@
 
 int main()
 {
-
+	int num1, num2, num3;
+	int a, b, c, d, e, f, g, h, i;
+	for (num1 = 123; num1 <= 987; num1++) {
+		a = num1 / 100;
+		b = (num1 / 10) % 10;
+		c = num1 % 10;
+		if (a == b || a == c || b == c)
+			continue;
+		for (num2 = 123; num2 <= 987; num2++) {
+			d = num2 / 100;
+			e = (num2 / 10) % 10;
+			f = num2 % 10;
+			if (d == e || d == f || e == f)
+				continue;
+			if (d == a || d == b || d == c || e == a || e == b || e == c || f == a || f == b || f == c)
+				continue;
+			for (num3 = 123; num3 <= 987; num3++) {
+				g = num3 / 100;
+				h = (num3 / 10) % 10;
+				i = num3 % 10;
+				if (g == h || g == i || h == i)
+					continue;
+				if (g == a || g == b || g == c || h == a || h == b || h == c || i == a || i == b || i == c)
+					continue;
+				if (g == d || g == e || g == f || h == d || h == e || h == f || i == d || i == e || i == f)
+					continue;
+				if (num1 * 2 == num2 && num1 * 3 == num3)
+					printf("%d %d %d\n", num1, num2, num3);
+			}
+		}
+	}
 
 	return 0;
 }
