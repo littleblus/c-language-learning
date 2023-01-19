@@ -52,6 +52,7 @@ int main() {
 			printf("当前容量为:%d\n", con.capacity);
 			break;
 		case EXIT:
+			savecon(&con);
 			destorycon(&con);
 			printf("关闭通讯录\n");
 			break;

@@ -21,6 +21,29 @@ void initcon(Contact* pc) {
 	}
 	pc->data = ptr;
 	pc->capacity = DEFAULT_SZ;
+	FILE* p = fopen("contact.txt", "rb");
+	if (!p) {
+		perror("initcon:fopen");
+		exit(0);
+	}
+	PeoInfo tmp = { 0 };
+	int i = 0;
+	while (1 == (fread(&tmp, sizeof(PeoInfo), 1, p))) {
+		if (pc->sz == pc->capacity) {
+			PeoInfo* tmp = realloc(pc->data, sizeof(PeoInfo) * (pc->capacity + DUFAULT_ADD));
+			if (tmp == NULL) {
+				perror("addcon::realloc");
+				return;
+			}
+			pc->data = tmp;
+			pc->capacity += DUFAULT_ADD;
+		}
+		pc->data[i] = tmp;
+		pc->sz++;
+		i++;
+	}
+	fclose(p);
+	p = NULL;
 }
 
 void addcon(Contact* pc) {
@@ -134,4 +157,22 @@ void destorycon(Contact* pc) {
 	pc->data = NULL;
 	pc->sz = 0;
 	pc->capacity = 0;
+}
+
+void savecon(Contact* pc) {
+	assert(pc);
+	FILE* p = fopen("contact.txt", "wb");
+	if (!p) {
+		perror("savecon:fopen");
+		return;
+	}
+	fwrite(pc->data, sizeof(PeoInfo), pc->sz, p);
+	fclose(p);
+	if (ferror(p)) {
+		printf("保存时出现错误!\n");
+		perror("savecon:");
+		return;
+	}
+	p = NULL;
+	printf("保存成功！\n");
 }

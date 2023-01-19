@@ -48,3 +48,6 @@ int showcon(Contact* pc);
 
 //清空通讯录
 void destorycon(Contact* pc);
+
+//保存通讯录
+void savecon(Contact* pc);
