@@ -24,7 +24,7 @@ void initcon(Contact* pc) {
 	FILE* p = fopen("contact.txt", "rb");
 	if (!p) {
 		perror("initcon:fopen");
-		exit(0);
+		exit(-1);
 	}
 	PeoInfo tmp = { 0 };
 	int i = 0;
@@ -32,7 +32,7 @@ void initcon(Contact* pc) {
 		if (pc->sz == pc->capacity) {
 			PeoInfo* tmp = realloc(pc->data, sizeof(PeoInfo) * (pc->capacity + DUFAULT_ADD));
 			if (tmp == NULL) {
-				perror("addcon::realloc");
+				perror("initcon:realloc");
 				return;
 			}
 			pc->data = tmp;
