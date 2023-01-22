@@ -181,103 +181,129 @@
 
 
 
-//3-5(TLE)
+//3-5(WA)
 
-void swap(char* a, char* b) {
-	char tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
+//void swap(char* a, char* b) {
+//	char tmp = *a;
+//	*a = *b;
+//	*b = tmp;
+//}
+//
+//int main() {
+//	//freopen("input.txt", "r", stdin);
+//	int count = 0;
+//	while (1) {
+//		char board[5][6] = { 0 };
+//		char tmp = 0;
+//		int flag = 0;
+//		//输入数组
+//		for (int i = 0; i < 5; i++) {
+//			//gets(board[i]);
+//			scanf("%[^\n]%*c", board[i]);
+//		}
+//		//遇到Z结束
+//		for (int i = 0; i < 5; i++) {
+//			if (board[i][0] == 'Z')
+//				return 0;
+//		}
+//		//判断空格位置
+//		int i = 0, j = 0;
+//		for (i = 0; i < 5; i++) {
+//			for (j = 0; j < 5; j++) {
+//				if (board[i][j] == ' ') {
+//					goto out;
+//				}
+//				if (j == 4 && board[i][4] == '\0') {
+//					board[i][4] = ' ';
+//					goto out;
+//				}
+//			}
+//		}
+//	out:
+//		//执行动作
+//		while (1) {
+//			scanf("%c", &tmp);
+//			if (tmp == '0') {
+//				//取掉之后的换行
+//				scanf("%c", &tmp);
+//				break;
+//			}
+//			flag = 0;
+//			switch (tmp) {
+//			case 'A':
+//				if (i == 0) {
+//					flag = 1;
+//					goto final;
+//				}
+//				swap(&board[i][j], &board[i - 1][j]);
+//				i--;
+//				break;
+//			case 'B':
+//				if (i == 4) {
+//					flag = 1;
+//					goto final;
+//				}
+//				swap(&board[i][j], &board[i + 1][j]);
+//				i++;
+//				break;
+//			case 'L':
+//				if (j == 0) {
+//					flag = 1;
+//					goto final;
+//				}
+//				swap(&board[i][j], &board[i][j - 1]);
+//				j--;
+//				break;
+//			case 'R':
+//				if (j == 4) {
+//					flag = 1;
+//					goto final;
+//				}
+//				swap(&board[i][j], &board[i][j + 1]);
+//				j++;
+//				break;
+//			}
+//		}
+//		final:
+//		//打印结果
+//		printf("Puzzle #%d:\n", ++count);
+//		if (flag == 1) {
+//			printf("This puzzle has no final configuration.\n");
+//		}
+//		else {
+//			for (int i = 0; i < 5; i++) {
+//				for (int j = 0; j < 4; j++) {
+//					printf("%c ", board[i][j]);
+//				}
+//				printf("%c", board[i][4]);
+//				printf("\n");
+//			}
+//		}
+//		//相邻结果之间加空行
+//		printf("\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+//3-6
+
+//3-9
 
 int main() {
-	//freopen("input.txt", "r", stdin);
-	int count = 0;
-	while (1) {
-		char board[5][6] = { 0 };
-		char tmp = 0;
-		int flag = 0;
-		//输入数组
-		for (int i = 0; i < 5; i++) {
-			//gets(board[i]);
-			scanf("%[^\n]%*c", board[i]);
-		}
-		//遇到Z结束
-		if (board[0][0] == 'Z')
-			break;
-		//判断空格位置
-		int i = 0, j = 0;
-		for (i = 0; i < 5; i++) {
-			for (j = 0; j < 5; j++) {
-				if (board[i][j] == ' ') {
-					goto out;
-				}
-				if (j == 4 && board[i][4] == '\0') {
-					board[i][4] = ' ';
-					goto out;
-				}
+	char s[100000], t[100000], * ps, * pt;
+	while (scanf("%s %s", s, t) != EOF) {
+		for (ps = s, pt = t; *ps && *pt; pt++) {
+			if (*ps == *pt) {
+				ps++;
 			}
 		}
-	out:
-		//执行动作
-		while (1) {
-			scanf("%c", &tmp);
-			if (tmp == '0') {
-				//取掉之后的换行
-				scanf("%c", &tmp);
-				break;
-			}
-			flag = 0;
-			switch (tmp) {
-			case 'A':
-				if (i == 0) {
-					flag = 1;
-					goto final;
-				}
-				swap(&board[i][j], &board[i - 1][j]);
-				i--;
-				break;
-			case 'B':
-				if (i == 4) {
-					flag = 1;
-					goto final;
-				}
-				swap(&board[i][j], &board[i + 1][j]);
-				i++;
-				break;
-			case 'L':
-				if (j == 0) {
-					flag = 1;
-					goto final;
-				}
-				swap(&board[i][j], &board[i][j - 1]);
-				j--;
-				break;
-			case 'R':
-				if (j == 4) {
-					flag = 1;
-					goto final;
-				}
-				swap(&board[i][j], &board[i][j + 1]);
-				j++;
-				break;
-			}
-		}
-		final:
-		//打印结果
-		printf("Puzzle #%d:\n", ++count);
-		if (flag == 1) {
-			printf("This puzzle has no final configuration.\n");
-		}
-		else {
-			for (int i = 0; i < 5; i++) {
-				for (int j = 0; j < 5; j++) {
-					printf("%c ", board[i][j]);
-				}
-				printf("\n");
-			}
-		}
-		//相邻结果之间加空行
-		printf("\n");
+		if (*ps == '\0')
+			printf("Yes\n");
+		else
+			printf("No\n");
 	}
 
 	return 0;
