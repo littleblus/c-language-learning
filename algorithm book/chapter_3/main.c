@@ -288,23 +288,31 @@
 
 
 
-//3-6
-
 //3-9
 
+//int main() {
+//	char s[100000], t[100000], * ps, * pt;
+//	while (scanf("%s %s", s, t) != EOF) {
+//		for (ps = s, pt = t; *ps && *pt; pt++) {
+//			if (*ps == *pt) {
+//				ps++;
+//			}
+//		}
+//		if (*ps == '\0')
+//			printf("Yes\n");
+//		else
+//			printf("No\n");
+//	}
+//
+//	return 0;
+//}
+
+
+
+//3-10
+
 int main() {
-	char s[100000], t[100000], * ps, * pt;
-	while (scanf("%s %s", s, t) != EOF) {
-		for (ps = s, pt = t; *ps && *pt; pt++) {
-			if (*ps == *pt) {
-				ps++;
-			}
-		}
-		if (*ps == '\0')
-			printf("Yes\n");
-		else
-			printf("No\n");
-	}
+
 
 	return 0;
 }
