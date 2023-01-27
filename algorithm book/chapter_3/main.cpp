@@ -1,9 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-
 //3-1
 
 //#define maxn 1000
@@ -311,8 +307,66 @@
 
 //3-10
 
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int x, y;
+} rec[6];
+
+int cmpnode(const void* a, const void* b) {
+    node* a1 = (node*)a;
+    node* b1 = (node*)b;
+    if (a1->x == b1->x)
+        return a1->y - b1->y;
+    else
+        return a1->x - b1->x;
+}
+
+void swap(int& a, int& b) {
+    int temp;
+    temp = a;
+    a = b;
+    b = temp;
+}
+
+int is_true() {
+    for (int i = 1; i < 4; i++) {
+        //确保前4个面的宽相等
+        if (rec[i].x != rec[0].x)
+            return 0;
+        //确保后4个面的长相等
+        if (rec[5 - i].y != rec[5].y)
+            return 0;
+    }
+    //确保后2个面的宽相等
+    if (rec[4].x != rec[5].x)
+        return 0;
+    //确保前2个面的长相等
+    if (rec[0].y != rec[1].y)
+        return 0;
+    //确保前2个面的长和后4个面的宽相等
+    if (rec[0].y != rec[5].x)
+        return 0;
+    return 1;
+}
+
 int main() {
-
-
-	return 0;
+    //freopen("input.txt", "r", stdin);
+    while (scanf("%d%d", &rec[0].x, &rec[0].y) != EOF) {
+        //让每个结构体内部 x <= y
+        if (rec[0].x > rec[0].y)
+            swap(rec[0].x, rec[0].y);
+        for (int i = 1; i < 6; i++) {
+            scanf("%d%d", &rec[i].x, &rec[i].y);
+            if (rec[i].x > rec[i].y)
+                swap(rec[i].x, rec[i].y);
+        }
+        //让长方形按照边长从小到大排序
+        qsort(rec, 6, sizeof(rec[0]), cmpnode);
+        if (is_true() == 1)
+            printf("POSSIBLE\n");
+        else printf("IMPOSSIBLE\n");
+    }
+    return 0;
 }
