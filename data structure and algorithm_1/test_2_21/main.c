@@ -49,10 +49,7 @@ int main() {
     SLprint(&nums);
     printf("%d\n", SLfindpos(&nums, 100));
 
-<<<<<<< HEAD
     SLdestory(&nums);
 
-=======
->>>>>>> 顺序表all finished
 	return 0;
 }
