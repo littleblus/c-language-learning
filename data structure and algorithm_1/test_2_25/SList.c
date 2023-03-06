@@ -24,6 +24,9 @@ void SLTPrint(SLTNode* plist) {
 
 void SLTPushBack(SLTNode** pplist, SLTDataType val) {
 	SLTNode* new = CreateSLTNode(val);
+	if (!new) {
+		return;
+	}
 	if (!(*pplist)) {
 		*pplist = new;
 	}
@@ -38,10 +41,17 @@ void SLTPushBack(SLTNode** pplist, SLTDataType val) {
 }
 
 void SLTPushFront(SLTNode** pplist, SLTDataType val) {
-
+	assert(pplist);
+	SLTNode* new = CreateSLTNode(val);
+	if (!new) {
+		return;
+	}
+	new->next = *pplist;
+	*pplist = new;
 }
 
 void SLTPopBack(SLTNode** pplist) {
+	assert(pplist);
 	if (!(*pplist))
 		return;
 	SLTNode* end = *pplist;
@@ -62,5 +72,69 @@ void SLTPopBack(SLTNode** pplist) {
 }
 
 void SLTPopFront(SLTNode** pplist) {
+	assert(pplist);
+	if (!(*pplist)) {
+		return;
+	}
+	//只有一个节点
+	if (!(*pplist)->next) {
+		free(*pplist);
+		*pplist = NULL;
+	}
+	else {
+		SLTNode* tmp = (*pplist)->next;
+		free(*pplist);
+		*pplist = tmp;
+		tmp = NULL;
+	}
+}
 
+SLTNode* SLTSearch(SLTNode* plist, SLTDataType val) {
+	while (plist) {
+		if (plist->data == val) {
+			return plist;
+		}
+		else {
+			plist = plist->next;
+		}
+	}
+	return NULL;
+}
+
+void SLTInsertAfter(SLTNode* pos, SLTDataType val) {
+	assert(pos);
+	SLTNode* new = CreateSLTNode(val);
+	if (!new) {
+		return;
+	}
+	new->next = pos->next;
+	pos->next = new;
+}
+
+void SLTEraseAfter(SLTNode* pos) {
+	assert(pos);
+	if (pos->next == NULL) {
+		return;
+	}
+	SLTNode* next = pos->next->next;
+	free(pos->next);
+	pos->next = next;
+	next = NULL;
+}
+
+void SLTDestory(SLTNode** pplist) {
+	assert(pplist);
+	if (*pplist == NULL) {
+		return;
+	}
+	SLTNode* cur = *pplist;
+	SLTNode* tmp = NULL;
+	while (cur) {
+		tmp = cur->next;
+		free(cur);
+		cur = tmp;
+	}
+	cur = NULL;
+	tmp = NULL;
+	*pplist = NULL;
 }

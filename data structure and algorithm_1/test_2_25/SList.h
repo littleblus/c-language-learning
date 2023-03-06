@@ -25,3 +25,15 @@ void SLTPopBack(SLTNode** pplist);
 
 //单链表头删
 void SLTPopFront(SLTNode** pplist);
+
+//单链表查找
+SLTNode* SLTSearch(SLTNode* plist, SLTDataType val);
+
+//单链表在pos后插入值
+void SLTInsertAfter(SLTNode* pos, SLTDataType val);
+
+//单链表删除在pos后的值
+void SLTEraseAfter(SLTNode* pos);
+
+//单链表的销毁
+void SLTDestory(SLTNode** pplist);
