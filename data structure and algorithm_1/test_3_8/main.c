@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct ListNode *detectCycle(struct ListNode *head) {
-    //检测是否有环
-	struct ListNode* slow, *fast;
+struct ListNode* detectCycle(struct ListNode* head) {
+	//检测是否有环
+	struct ListNode* slow, * fast;
 	slow = fast = head;
-	while(fast && fast->next) {
+	while (fast && fast->next) {
 		slow = slow->next;
 		fast = fast->next->next;
-		if(slow == fast) {
+		if (slow == fast) {
 			//有环
-			struct ListNode* meet, *start;
+			struct ListNode* meet, * start;
 			meet = slow;
 			start = head;
-			while(meet != start) {
+			while (meet != start) {
 				meet = meet->next;
 				start = start->next;
 			}
@@ -25,20 +25,20 @@ struct ListNode *detectCycle(struct ListNode *head) {
 }
 
 struct Node {
-     int val;
-     struct Node *next;
-     struct Node *random;
+	int val;
+	struct Node* next;
+	struct Node* random;
 };
 
 struct Node* copyRandomList(struct Node* head) {
-	if(!head) {
+	if (!head) {
 		return NULL;
 	}
-	struct Node* cur = head; 
+	struct Node* cur = head;
 	struct Node* guard = (struct Node*)malloc(sizeof(struct Node));//哨兵位
 	guard->val = -1;
 	struct Node* prev = guard;
-	while(cur) {
+	while (cur) {
 		struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
 		newnode->val = cur->val;//拷贝值
 		prev->next = newnode;
@@ -48,17 +48,17 @@ struct Node* copyRandomList(struct Node* head) {
 	prev->next = NULL;
 	cur = head;
 	struct Node* curnew = guard->next;
-	while(cur) {
+	while (cur) {
 		//找到random指向的pos，并拷贝
-		if(cur->random == NULL) {
+		if (cur->random == NULL) {
 			curnew->random = NULL;
 			curnew = curnew->next;
 		}
 		else {
 			int pos = 0;
 			struct Node* search = head;
-			while(1) {
-				if(search == cur->random) {
+			while (1) {
+				if (search == cur->random) {
 					break;
 				}
 				else {
@@ -67,7 +67,7 @@ struct Node* copyRandomList(struct Node* head) {
 				}
 			}
 			struct Node* ret = guard->next;
-			while(pos--) {
+			while (pos--) {
 				ret = ret->next;
 			}
 			curnew->random = ret;
