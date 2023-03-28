@@ -25,6 +25,8 @@ bin-release/
 *.ipch
 Debug/
 .vs
+.idea/
+cmake-build-debug/
 Release/
 
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
