@@ -104,7 +104,6 @@ void BinaryTreeInOrder(BTNode *root) {
 	BinaryTreePrevOrder(root->_left);
 	printf("%c ", root->_data);
 	BinaryTreePrevOrder(root->_right);
-	printf("\n");
 }
 
 void BinaryTreePostOrder(BTNode *root) {
@@ -115,7 +114,6 @@ void BinaryTreePostOrder(BTNode *root) {
 	BinaryTreePrevOrder(root->_left);
 	BinaryTreePrevOrder(root->_right);
 	printf("%c ", root->_data);
-	printf("\n");
 }
 
 void BinaryTreeLevelOrder(BTNode *root) {
