@@ -11,9 +11,13 @@ void Print(int* a, int n) {
 }
 
 int main() {
+	//≈≈∫√ «-8 0 1 2 3 3 4 5 6 18
 	int arr[10] = { 3,1,4,5,2,-8,6,18,3,0 };
 	//InsertSort(arr, 10);
-	ShellSort(arr, 10);
+	//ShellSort(arr, 10);
+	//SelectSort(arr, 10);
+	//HeapSort(arr, 10);
+	BubbleSort(arr, 10);
 	Print(arr, 10);
 	return 0;
 }
