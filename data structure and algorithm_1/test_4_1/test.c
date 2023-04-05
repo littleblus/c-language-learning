@@ -17,7 +17,8 @@ int main() {
 	//ShellSort(arr, 10);
 	//SelectSort(arr, 10);
 	//HeapSort(arr, 10);
-	BubbleSort(arr, 10);
+	//BubbleSort(arr, 10);
+	QuickSort(arr, 0, 9);
 	Print(arr, 10);
 	return 0;
 }
