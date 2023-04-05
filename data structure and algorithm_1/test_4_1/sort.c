@@ -110,10 +110,15 @@ void HeapSort(int* a, int n) {
 
 void BubbleSort(int* a, int n) {
 	for (int i = 0; i < n - 1; i++) {//×ßn-1ÌË
+		bool exchange = false;
 		for (int j = 0; j < n - 1 - i; j++) {
-			if (a[j] > a[j + 1])
+			if (a[j] > a[j + 1]) {
 				swap(&a[j], &a[j + 1]);
+				exchange = true;
+			}
 		}
+		if (!exchange)
+			break;
 	}
 }
 
@@ -208,6 +213,8 @@ int PartSort3(int* a, int left, int right) {
 void QuickSort(int* a, int left, int right) {
 	if (left >= right)
 		return;
+	// int keyi = PartSort1(a, left, right);
+	// int keyi = PartSort2(a, left, right);
 	int keyi = PartSort3(a, left, right);
 	//µÝ¹é
 	QuickSort(a, left, keyi - 1);

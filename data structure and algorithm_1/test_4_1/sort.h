@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 //≤Â»Î≈≈–Ú
 void InsertSort(int* a, int n);
 
