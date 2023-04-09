@@ -1,6 +1,10 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 
 #include "sort.h"
+#include "stack.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 static void swap(int* a, int* b) {
 	int tmp = *a;
@@ -110,10 +114,15 @@ void HeapSort(int* a, int n) {
 
 void BubbleSort(int* a, int n) {
 	for (int i = 0; i < n - 1; i++) {//走n-1趟
+		bool exchange = false;
 		for (int j = 0; j < n - 1 - i; j++) {
-			if (a[j] > a[j + 1])
+			if (a[j] > a[j + 1]) {
 				swap(&a[j], &a[j + 1]);
+				exchange = true;
+			}
 		}
+		if (!exchange)
+			break;
 	}
 }
 
@@ -208,8 +217,92 @@ int PartSort3(int* a, int left, int right) {
 void QuickSort(int* a, int left, int right) {
 	if (left >= right)
 		return;
-	int keyi = PartSort3(a, left, right);
-	//递归
-	QuickSort(a, left, keyi - 1);
-	QuickSort(a, keyi + 1, right);
+	//小区间优化，减少递归次数
+	if (right - left + 1 > 10) {
+		// int keyi = PartSort1(a, left, right);
+		// int keyi = PartSort2(a, left, right);
+		int keyi = PartSort3(a, left, right);
+		//递归
+		QuickSort(a, left, keyi - 1);
+		QuickSort(a, keyi + 1, right);
+	}
+	else {
+		InsertSort(&a[left], right - left + 1);
+	}
+}
+
+//快速排序的非递归实现
+void QuickSortNonR(int* a, int left, int right) {
+	Stack st;
+	STInit(&st);
+	//入第一个区间
+	STPush(&st, right);
+	STPush(&st, left);
+	while (!STEmpty(&st)) {
+		int begin = STTop(&st);
+		STPop(&st);
+		int end = STTop(&st);
+		STPop(&st);
+		//小区间优化
+		if (right - left + 1 > 10) {
+			int keyi = PartSort3(a, begin, end);
+			if (keyi - 1 > begin) {
+				STPush(&st, keyi - 1);
+				STPush(&st, begin);
+			}
+			if (keyi + 1 < end) {
+				STPush(&st, end);
+				STPush(&st, keyi + 1);
+			}
+		}
+		else {
+			InsertSort(&a[begin], end - begin + 1);
+		}
+	}
+	STDestory(&st);
+}
+
+static void _MergeSort(int* a, int* tmp, const int left, const int right) {
+	if (right - left + 1 <= 10) {
+		InsertSort(&a[left], right - left + 1);
+		return;
+	}
+	int mid = (right + left) >> 1;
+	_MergeSort(a, tmp, left, mid);
+	_MergeSort(a, tmp, mid + 1, right);
+	// [left , mid] [ mid + 1 , right]
+	int p1 = left;
+	int p2 = mid + 1;
+	int i = left;
+	while (p1 <= mid && p2 <= right) {
+		if (a[p1] < a[p2]) {
+			tmp[i++] = a[p1++];
+		}
+		else {
+			tmp[i++] = a[p2++];
+		}
+	}
+	//其中一个指针走到了尽头
+	while (p1 <= mid) {
+		tmp[i++] = a[p1++];
+	}
+	while (p2 <= right) {
+		tmp[i++] = a[p2++];
+	}
+	//覆盖原数组
+	memcpy(a + left, tmp + left, sizeof(int) * (right - left + 1));
+}
+
+void MergeSort(int* a, int n) {
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (!tmp) {
+		perror("malloc failed");
+		return;
+	}
+	_MergeSort(a, tmp, 0, n - 1);
+	free(tmp);
+}
+
+void MergeSortNonR(int* a, int n) {
+
 }
