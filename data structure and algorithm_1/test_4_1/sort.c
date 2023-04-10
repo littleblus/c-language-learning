@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 static void swap(int* a, int* b) {
 	int tmp = *a;
@@ -263,6 +264,7 @@ void QuickSortNonR(int* a, int left, int right) {
 }
 
 static void _MergeSort(int* a, int* tmp, const int left, const int right) {
+	//小区间优化
 	if (right - left + 1 <= 10) {
 		InsertSort(&a[left], right - left + 1);
 		return;
@@ -305,4 +307,25 @@ void MergeSort(int* a, int n) {
 
 void MergeSortNonR(int* a, int n) {
 
+}
+
+void MonkeySort(int* a, int n) {
+	int i, j;
+	srand((unsigned int)time(NULL));
+	while (1) {
+		for (i = 0; i < n - 1; i++) {
+			if (a[i] > a[i + 1]) {
+				break;//如果有元素在不正确的位置，跳出循环
+			}
+		}
+		if (i == n - 1) {//如果所有元素都在正确位置，排序完成
+			return;
+		}
+		for (i = 0; i < n; i++) {
+			j = rand() % n;//随机交换两个元素的位置
+			int tmp = a[i];
+			a[i] = a[j];
+			a[j] = tmp;
+		}
+	}
 }

@@ -25,3 +25,6 @@ void QuickSortNonR(int* a, int left, int right);
 //πÈ≤¢≈≈–Ú
 void MergeSort(int* a, int n);
 void MergeSortNonR(int* a, int n);
+
+//∫Ô◊”≈≈–Ú
+void MonkeySort(int* a, int n);
