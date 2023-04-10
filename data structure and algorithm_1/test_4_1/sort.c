@@ -306,7 +306,71 @@ void MergeSort(int* a, int n) {
 }
 
 void MergeSortNonR(int* a, int n) {
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	if (!tmp) {
+		perror("malloc failed");
+		return;
+	}
+	int gap = 1;
+	while (gap < n) {
+		for (int i = 0; i < n; i += 2 * gap) {
+			int begin1 = i;
+			int end1 = begin1 + gap - 1;
+			int begin2 = begin1 + gap;
+			int end2 = begin2 + gap - 1;
+			//printf("[%d,%d][%d,%d] ", begin1, end1, begin2, end2);
+			if (end1 >= n || begin2 >= n)
+				break;
+			if (end2 >= n)
+				end2 = n - 1;
+			int j = i;//tmp尾指针
+			while (begin1 <= end1 && begin2 <= end2) {
+				if (a[begin1] < a[begin2]) {
+					tmp[j++] = a[begin1++];
+				}
+				else {
+					tmp[j++] = a[begin2++];
+				}
+			}
+			//其中一个指针走到了尽头
+			while (begin1 <= end1) {
+				tmp[j++] = a[begin1++];
+			}
+			while (begin2 <= end2) {
+				tmp[j++] = a[begin2++];
+			}
+			memcpy(a + i, tmp + i, sizeof(int) * (end2 - i + 1));
+		}
+		//printf("\n");
+		gap *= 2;
+	}
+}
 
+void CountSort(int* a, int n) {
+	int max, min;
+	max = min = a[0];
+	for (int i = 0; i < n; i++) {
+		if (a[i] > max)
+			max = a[i];
+		if (a[i] < min)
+			min = a[i];
+	}
+	int num = max - min + 1;
+	int* count = (int*)calloc(num, sizeof(int));
+	if (!count) {
+		perror("calloc failed");
+		return;
+	}
+	for (int i = 0; i < n; i++) {
+		count[a[i] - min]++;
+	}
+	int p = 0;
+	for (int i = 0; i < num; i++) {
+		while (count[i]--) {
+			a[p++] = i + min;
+		}
+	}
+	free(count);
 }
 
 void MonkeySort(int* a, int n) {

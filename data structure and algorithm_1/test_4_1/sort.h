@@ -26,5 +26,8 @@ void QuickSortNonR(int* a, int left, int right);
 void MergeSort(int* a, int n);
 void MergeSortNonR(int* a, int n);
 
+//¼ÆÊıÅÅĞò
+void CountSort(int* a, int n);
+
 //ºï×ÓÅÅĞò
 void MonkeySort(int* a, int n);
