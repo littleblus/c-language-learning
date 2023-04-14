@@ -23,6 +23,7 @@ void TestOP() {
 	int* a6 = (int*)malloc(sizeof(int) * N);
 	int* a7 = (int*)malloc(sizeof(int) * N);
 	int* a8 = (int*)malloc(sizeof(int) * N);
+	int* a9 = (int*)malloc(sizeof(int) * N);
 	for (int i = 0; i < N; ++i) {
 		a1[i] = rand();
 		a2[i] = a1[i];
@@ -32,6 +33,8 @@ void TestOP() {
 		a6[i] = a1[i];
 		a7[i] = a1[i];
 		a8[i] = a1[i];
+		a9[i] = a1[i];
+
 	}
 	int begin1 = clock();
 	//InsertSort(a1, N);
@@ -72,6 +75,11 @@ void TestOP() {
 	CountSort(a8, N);
 	int end8 = clock();
 	printf("CountSort:%d\n", end8 - begin8);
+
+	int begin9 = clock();
+	RadixSort(a9, N);
+	int end9 = clock();
+	printf("RadixSort:%d\n", end9 - begin9);
 	
 	free(a1);
 	free(a2);
@@ -81,18 +89,19 @@ void TestOP() {
 	free(a6);
 	free(a7);
 	free(a8);
+	free(a9);
 }
 
 
 void test() {
-	int arr[] = { 36, 54, 109, 27, 5, 7, -3, 0 };
+	int arr[] = { 36, 54, -109, -27, 5, 7, -3, 0 };
 	int len = sizeof(arr) / sizeof(arr[0]);
-	MergeSortNonR(arr, len);
+	RadixSort(arr, len);
 	Print(arr, len);
 }
 
 int main() {
-	//TestOP();
-	test();
+	TestOP();
+	//test();
 	return 0;
 }

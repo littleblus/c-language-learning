@@ -306,6 +306,8 @@ void MergeSort(int* a, int n) {
 }
 
 void MergeSortNonR(int* a, int n) {
+	if (n <= 0)
+		return;
 	int* tmp = (int*)malloc(sizeof(int) * n);
 	if (!tmp) {
 		perror("malloc failed");
@@ -371,6 +373,72 @@ void CountSort(int* a, int n) {
 		}
 	}
 	free(count);
+}
+
+static void _RadixSort(int* a, int n) {
+	if (n <= 0)
+		return;
+	int max = a[0]; // 获取数组中最大值
+	for (int i = 1; i < n; i++) {
+		if (a[i] > max)
+			max = a[i];
+	}
+	int* output = (int*)malloc(sizeof(int) * n);
+	if (!output) {
+		perror("malloc failed");
+		return;
+	}
+	for (int exp = 1; max / exp > 0; exp *= 10) { // 从最低位开始排序
+		int count[10] = { 0 };
+		// 统计每个数字出现的次数
+		for (int i = 0; i < n; i++) {
+			count[(a[i] / exp) % 10]++;
+		}
+		// 将count数组转换为每个数字在output数组中的位置
+		for (int i = 1; i < 10; i++) {
+			count[i] += count[i - 1];
+		}
+		// 将每个数字按照count数组中的位置放入output数组中
+		for (int i = n - 1; i >= 0; i--) {
+			output[count[(a[i] / exp) % 10] - 1] = a[i];
+			count[(a[i] / exp) % 10]--;
+		}
+		// 将output数组复制到a数组中
+		memcpy(a, output, sizeof(int) * n);
+	}
+	free(output);
+}
+
+void RadixSort(int* a, int n) {
+	if (n <= 0)
+		return;
+	int* nonNegative = (int*)malloc(sizeof(int) * n);
+	int* negative = (int*)malloc(sizeof(int) * n);
+	if (!nonNegative || !negative) {
+		perror("malloc failed");
+		return;
+	}
+	int nonNCount = 0;
+	int nCount = 0;
+	for (int i = 0; i < n; i++) {
+		if (a[i] >= 0) {
+			nonNegative[nonNCount++] = a[i];
+		}
+		else {//负数转换为正数
+			negative[nCount++] = -a[i];
+		}
+	}
+	_RadixSort(nonNegative, nonNCount);//排正数
+	_RadixSort(negative, nCount);//排负数
+	int i = 0;
+	for (int j = nCount - 1; j >= 0; j--) {//放置负数
+		a[i++] = -negative[j];
+	}
+	for (int j = 0; j < nonNCount; j++) {//放置正数
+		a[i++] = nonNegative[j];
+	}
+	free(nonNegative);
+	free(negative);
 }
 
 void MonkeySort(int* a, int n) {

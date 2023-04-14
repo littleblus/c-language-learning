@@ -29,5 +29,8 @@ void MergeSortNonR(int* a, int n);
 //计数排序
 void CountSort(int* a, int n);
 
+//基数排序
+void RadixSort(int* a, int n);
+
 //猴子排序
 void MonkeySort(int* a, int n);
