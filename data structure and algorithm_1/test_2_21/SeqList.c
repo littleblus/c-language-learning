@@ -5,7 +5,7 @@
 static void CheckCapacity(SL* s) {
 	assert(s);
 	if (s->size == s->capacity) {
-		SLDataType* tmp = (SLDataType*)realloc(s->a, sizeof(int) * s->capacity * ADDTIMES);
+		SLDataType* tmp = (SLDataType*)realloc(s->a, sizeof(SLDataType) * s->capacity * ADDTIMES);
 		if (!tmp) {
 			perror("realloc failed");
 			return;
@@ -17,7 +17,7 @@ static void CheckCapacity(SL* s) {
 
 void SLinit(SL* s) {
 	assert(s);
-	SLDataType* tmp = (SLDataType*)malloc(sizeof(int) * INIT_N);
+	SLDataType* tmp = (SLDataType*)malloc(sizeof(SLDataType) * INIT_N);
 	if (!tmp) {
 		perror("malloc failed");
 		return;
@@ -102,6 +102,7 @@ void SLerase(SL* s, int pos) {
 int SLfindpos(SL* s, SLDataType val) {
 	assert(s);
 	for (int i = 0; i < s->size; i++) {
+		//如果存储的数据结构不是int，能否直接判断相等？
 		if (s->a[i] == val) {
 			return i;
 		}
