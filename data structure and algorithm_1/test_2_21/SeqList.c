@@ -23,7 +23,7 @@ void SLinit(SL* s) {
 		return;
 	}
 	s->a = tmp;
-	s->capacity = 4;
+	s->capacity = INIT_N;
 	s->size = 0;
 }
 
