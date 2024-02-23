@@ -1,0 +1,38 @@
+# Compiled object files
+*.o
+*.ko
+*.obj
+*.elf
+
+# Compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Executables
+*.exe
+*.out
+
+# Build directories
+build/
+bin/
+Debug/
+Release/
+cmake-build-debug/
+
+# IDE specific files
+.vscode/
+.idea/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.sln.docstates
+*.sln.ide
+
+# Dependency directories
+dependencies/
+libs/
