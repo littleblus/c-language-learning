@@ -6,27 +6,27 @@
 int exitcode = 0;
 
 static void menu_a() {
-	safe_print("\n");
-	safe_print("Student performance management system\n");
-	safe_print("0.Exit and save\n");
-	safe_print("1.Add\n");
-	safe_print("2.Modify\n");
-	safe_print("3.Delete\n");
-	safe_print("4.Query\n");
-	safe_print("5.Sort\n");
-	safe_print("6.Excellence selection\n");
-	safe_print("7.Forewarning\n");
-	safe_print("8.Display\n");
-	safe_print("\n");
+	printf("\n");
+	printf("Student performance management system\n");
+	printf("0.Exit and save\n");
+	printf("1.Add\n");
+	printf("2.Modify\n");
+	printf("3.Delete\n");
+	printf("4.Query\n");
+	printf("5.Sort\n");
+	printf("6.Excellence selection\n");
+	printf("7.Forewarning\n");
+	printf("8.Display\n");
+	printf("\n");
 }
 
 static void menu_u() {
-	safe_print("\n");
-	safe_print("Student performance management system\n");
-	safe_print("0.Exit\n");
-	safe_print("4.Query myself\n");
-	safe_print("5.Sort myself\n");
-	safe_print("\n");
+	printf("\n");
+	printf("Student performance management system\n");
+	printf("0.Exit\n");
+	printf("4.Query myself\n");
+	printf("5.Sort myself\n");
+	printf("\n");
 }
 
 enum {
@@ -539,6 +539,6 @@ int main() {
 error:
 	free(login_name);
 	safe_print("bye!\n");
-	getchar();getchar(); // 暂停
+	system("pause");
 	return exitcode;
 }
